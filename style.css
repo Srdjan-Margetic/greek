@@ -78,3 +78,12 @@ select {
   padding: 0 26px;
   appearance: none;
 }
+
+.btn_add {
+  background: blue;
+  color: white;
+  margin: 2px;
+  padding: 5px 10px;
+  /* height: 20px; */
+  width: 100px;
+}
