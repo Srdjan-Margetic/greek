@@ -35,7 +35,7 @@ h1 {
 }
 
 .day {
-  width: 120px;
+  width: 100px;
   border: solid 1px white;
   color: #9bafd9;
   display: flex;
@@ -62,7 +62,7 @@ h1 {
 .shift {
   background: white;
   height: 50px;
-  width: 120px;
+  width: 100px;
   margin: 2px;
   cursor: pointer;
   display: flex;
