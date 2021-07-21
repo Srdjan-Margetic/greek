@@ -44,11 +44,14 @@ h1 {
   margin: 2px;
 }
 
-.server {
+.server,
+.employe_number {
   display: flex;
 }
 
-.name {
+.name,
+.corner_lunch,
+.corner_dinner {
   width: 90px;
   height: 50px;
   margin: 2px;
@@ -59,7 +62,15 @@ h1 {
   justify-content: center;
 }
 
-.shift {
+.corner_lunch,
+.corner_dinner {
+  background-color: green;
+  height: 30px;
+}
+
+.shift,
+.lunch,
+.dinner {
   background: white;
   height: 50px;
   width: 100px;
@@ -68,6 +79,11 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.lunch,
+.dinner {
+  height: 30px;
 }
 
 .styledSelect {
