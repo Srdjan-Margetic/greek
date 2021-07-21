@@ -24,7 +24,6 @@
 
         <div class="server_container">
           <div class="server">
-            <span class="name">Srdjan</span>
             <select class="shift">
               <option value="off">Off</option>
               <option value="lunch">Lunch</option>
@@ -68,11 +67,46 @@
               <option value="double">Double</option>
             </select>
           </div>
-          
+        </div>
+        <!-- End of serveer container-->
+
+        <div class="employe_number_container">
+          <div class="employe_number">
+            <span class="corner_lunch">Lunch</span>
+            <div class="lunch">0</div>
+            <div class="lunch">0</div>
+            <div class="lunch">0</div>
+            <div class="lunch">0</div>
+            <div class="lunch">0</div>
+            <div class="lunch">0</div>
+            <div class="lunch">0</div>
+          </div>
+        </div>
+        <div class="employe_number_container">
+          <div class="employe_number">
+            <span class="corner_dinner">Dinner</span>
+            <div class="dinner">0</div>
+            <div class="dinner">0</div>
+            <div class="dinner">0</div>
+            <div class="dinner">0</div>
+            <div class="dinner">0</div>
+            <div class="dinner">0</div>
+            <div class="dinner">0</div>
+          </div>
+        </div>
       </div>
-      
+      <!-- End of shedule container-->
+      <br /><br />
+      <input
+        type="text"
+        id="server-name"
+        class="name"
+        placeholder="Server Name"
+      />
       <button id="addServer" class="btn_add">Add Server</button>
 
+      <button id="editServer" class="btn_edit">Edit</button>
+      <button id="deleteServer" class="btn_delete">Delete</button>
     </main>
 
     <script src="main.js"></script>
