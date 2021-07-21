@@ -1,8 +1,10 @@
 const btnAdd = document.querySelector('#addServer');
 const serverContainer = document.querySelector('.server_container');
 const serverNameInput = document.querySelector('#server-name');
+const btnEdit = document.querySelector('#editServer');
+const btnDelete = document.querySelector('#deleteServer');
 
-// server Controller
+// Server Controller
 const ServerCtrl = (function () {
   // server Constructor
   const Server = function (id, name) {
@@ -52,7 +54,7 @@ const UICtrl = (function () {
 
       servers.forEach(function (server) {
         html += `<div id="${server.id}" class="server">
-        <span class="name">${server.name}</span>
+        <span class="name">${server.name} <i class=" server-info fas fa-info-circle"></i></span>
 
         <select class="shift">
           <option value="off">Off</option>
@@ -117,7 +119,7 @@ const UICtrl = (function () {
 
       // Add html
       div.innerHTML = `
-        <span class="name">${servers.name}</span>
+        <span class="name">${servers.name} <i class="server-info fas fa-info-circle"></i> </span>
         <select class="shift">
           <option value="off">Off</option>
           <option value="lunch">Lunch</option>
@@ -171,6 +173,10 @@ const UICtrl = (function () {
     clearInput: function () {
       serverNameInput.value = '';
     },
+
+    clearEditState: function () {
+      UICtrl.clearInput;
+    },
   };
 })();
 
@@ -205,6 +211,9 @@ const App = (function (ServerCtrl, UICtrl) {
   // Public methods
   return {
     init: function () {
+      // Clear edit state / set inital set
+      UICtrl.clearEditState();
+
       // Fetch items from data structure
       const servers = ServerCtrl.getServer();
 
