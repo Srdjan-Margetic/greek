@@ -106,11 +106,45 @@ select {
   appearance: none;
 }
 
-.btn_add {
+.btn_add,
+.btn_update,
+.btn_delete {
   background: blue;
   color: white;
   margin: 2px;
   padding: 5px 10px;
   /* height: 20px; */
   width: 100px;
+}
+
+.server_info_popup {
+  position: absolute;
+  background-color: burlywood;
+  top: 0;
+  right: -200px;
+  border: 1px solid black;
+  padding: 10px;
+  width: 200px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close_popup {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.test {
+  /* display: none; */
+  background-color: burlywood;
+  border: 1px solid black;
+  padding: 10px;
+  width: 200px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
