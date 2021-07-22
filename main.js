@@ -1,8 +1,12 @@
 const btnAdd = document.querySelector('#addServer');
 const serverContainer = document.querySelector('.server_container');
+const server = document.querySelector('.server');
 const serverNameInput = document.querySelector('#server-name');
 const btnEdit = document.querySelector('#editServer');
 const btnDelete = document.querySelector('#deleteServer');
+const infoPopup = document.querySelector('.server_info_popup');
+const infoIcon = document.querySelector('.server-info');
+const btnUpdate = document.querySelector('#update-server');
 
 // Server Controller
 const ServerCtrl = (function () {
@@ -40,6 +44,26 @@ const ServerCtrl = (function () {
 
       return newServer;
     },
+
+    getServerByid: function (id) {
+      let found = null;
+
+      data.servers.forEach(function (item) {
+        if (item.id === id) {
+          found = item;
+        }
+      });
+      return found;
+    },
+
+    setCurrentServer: function (item) {
+      data.currentServer = item;
+    },
+
+    getCurrentServer: function () {
+      return data.currentServer;
+    },
+
     logData: function () {
       return data;
     },
@@ -54,7 +78,14 @@ const UICtrl = (function () {
 
       servers.forEach(function (server) {
         html += `<div id="${server.id}" class="server">
-        <span class="name">${server.name} <i class=" server-info fas fa-info-circle"></i></span>
+    
+        <span class="name">${server.name} <i class=" server-info fas fa-info-circle"></i>       
+        <div class="server_info_popup">
+              <div class="close_popup">x</div>
+              <button id="editServer" class="btn_edit">Edit</button>
+              <button id="deleteServer" class="btn_delete">Delete</button>
+            </div>
+        </span>
 
         <select class="shift">
           <option value="off">Off</option>
@@ -119,7 +150,13 @@ const UICtrl = (function () {
 
       // Add html
       div.innerHTML = `
-        <span class="name">${servers.name} <i class="server-info fas fa-info-circle"></i> </span>
+        <span class="name">${servers.name} <i class="server-info fas fa-info-circle"></i> 
+             <div class="server_info_popup">
+            <div class="close_popup">x</div>
+            <button id="editServer" class="btn_edit">Edit</button>
+            <button id="deleteServer" class="btn_delete">Delete</button>
+          </div>
+          </span>
         <select class="shift">
           <option value="off">Off</option>
           <option value="lunch">Lunch</option>
@@ -174,8 +211,22 @@ const UICtrl = (function () {
       serverNameInput.value = '';
     },
 
+    addItemToForm: function () {
+      serverNameInput.value = ServerCtrl.getCurrentServer().name;
+      UICtrl.showEditState();
+    },
+
     clearEditState: function () {
       UICtrl.clearInput;
+      btnUpdate.style.display = 'none';
+      btnDelete.style.display = 'none';
+      btnAdd.style.display = 'block';
+    },
+
+    showEditState: function () {
+      btnUpdate.style.display = 'block';
+      btnDelete.style.display = 'block';
+      btnAdd.style.display = 'none';
     },
   };
 })();
@@ -193,21 +244,46 @@ const App = (function (ServerCtrl, UICtrl) {
     // Get form input from UI Controller
     const input = UICtrl.getServerInput();
 
+    // Edit icon click
+    serverContainer.addEventListener('click', serverUpdateSubmit);
+
     // Check for name and calorie input
     if (input.name !== '') {
-      // Add item
+      // Add items
       const newServer = ServerCtrl.addServer(input.name);
+
       //Add Server to UI List
       UICtrl.addListServer(newServer);
 
       //Clear fields
-
       UICtrl.clearInput();
     }
 
     e.preventDefault();
   };
 
+  // Update item submit
+  const serverUpdateSubmit = function (e) {
+    // Get List item id
+    if (e.target.classList.contains('btn_edit')) {
+      // Get list item id
+      const listId = e.target.parentNode.parentNode.parentNode.id;
+
+      // Break into an array
+      const listIdArr = listId.split('-');
+
+      //Get actual id
+      const id = parseInt(listIdArr[1]);
+
+      // Get Item
+      const serverToEdit = ServerCtrl.getServerByid(id);
+      ServerCtrl.setCurrentServer(serverToEdit);
+
+      UICtrl.addItemToForm();
+    }
+
+    e.preventDefault();
+  };
   // Public methods
   return {
     init: function () {
